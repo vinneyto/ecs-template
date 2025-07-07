@@ -1,9 +1,8 @@
-import { LifeCircleComponent } from "../ecs-components/LifeCircleComponent";
-import type { IECSQueue } from "../ecs/ECSContext";
+import { DestroyComponent } from "../ecs-components/DestroyComponent";
 import type { ECSEntity } from "../ecs/ECSEntity";
 import type { ECSWorld } from "../ecs/ECSWorld";
 
-export class ECSQueue implements IECSQueue {
+export class ECSQueue {
   private readonly entitiesToAdd = new Set<ECSEntity>();
   private readonly entitiesToDestroy = new Set<ECSEntity>();
 
@@ -21,9 +20,9 @@ export class ECSQueue implements IECSQueue {
     }
 
     for (const entity of this.entitiesToDestroy) {
-      const lifeCircleComponent = entity.getComponent(LifeCircleComponent);
-      if (lifeCircleComponent) {
-        lifeCircleComponent.state = "destroy";
+      const destroyComponent = entity.getComponent(DestroyComponent);
+      if (destroyComponent) {
+        destroyComponent.destroy = true;
       }
     }
 

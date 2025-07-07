@@ -1,12 +1,9 @@
-import type { ECSContext } from "./ECSContext";
 import type { ECSSystem } from "./ECSSystem";
 import type { ECSWorld } from "./ECSWorld";
 
-type ECSGroupChild<Context extends ECSContext> =
-  | ECSSystemGroup<Context>
-  | ECSSystem<Context>;
+type ECSGroupChild<Context> = ECSSystemGroup<Context> | ECSSystem<Context>;
 
-export class ECSSystemGroup<Context extends ECSContext> {
+export class ECSSystemGroup<Context> {
   public readonly name: string;
 
   private readonly children: Array<ECSGroupChild<Context>> = [];
